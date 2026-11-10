@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research · Niloufar Dizangian</title>
+<link rel="stylesheet" href="css/site.css">
+<script src="js/site.js" defer></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="side"></aside>
+
+  <main class="content">
+    <div class="k">research</div>
+    <h1>Getting usable power out of very small sources</h1>
+    <p class="lead">Thermoelectric generators, small PV cells and other harvesters give a few hundred millivolts. My work is the converter between that source and the load: high voltage gain and continued operation after a fault.</p>
+
+    <h2>Ph.D. thesis</h2>
+    <div class="panel">
+      <p class="mono muted" style="font-size:.78rem;margin-bottom:.4em"><a href="https://www.univ-lorraine.fr/" target="_blank" rel="noopener">Université de Lorraine</a> · <a href="https://ijl.univ-lorraine.fr/" target="_blank" rel="noopener">Institut Jean Lamour</a> · 2023–2026 · defense 2 Dec 2026</p>
+      <h3 style="margin-bottom:.6em">Advanced High-Gain and Fault-Tolerant Electronic Interfaces for Small-Scale Energy Harvesting Systems</h3>
+      <p>Sensors and smart devices increasingly run on energy harvested from their surroundings, such as sunlight or heat. These sources give low, variable voltages that a circuit cannot use directly. My thesis develops power-electronic interfaces that raise this voltage with as few actively controlled switches as possible, extract the available energy, and keep working after a switch fails.</p>
+      <p style="margin:0">Supervisors: Prof. Philippe Poure and Prof. Slavisa Jovanovic.</p>
+    </div>
+
+    <section class="explorer" aria-label="Thesis contributions">
+      <div class="explorer-head"><span>thesis/ · contributions</span><span>3 parts</span></div>
+      <div class="file-row">
+        <span class="ln">01</span><i class="led"></i>
+        <span><span class="name">Two-stage interfaces for energy harvesting</span><span class="path">Buck · Boost · Buck–Boost · Ćuk · SEPIC → 25 architectures</span>
+        <span class="desc">In a two-stage interface, the first converter extracts the maximum power from the source (MPPT) and the second regulates the output voltage. Combining five basic converters gives twenty-five possible architectures, which I compared. The cascaded Boost–Boost was chosen as the main case study: it offers one of the highest voltage gains, its continuous input current suits MPPT, and it needs few components.</span></span>
+        <span class="tag g">ICECS '24</span>
+      </div>
+      <div class="file-row">
+        <span class="ln">02</span><i class="led amber"></i>
+        <span><span class="name">High-gain single-switch converters</span><span class="path">SSQB · VL-QBC · DVL-QBC · QVL-QBC · unified method</span>
+        <span class="desc">Replacing one of the two switches of the cascaded Boost with a diode gives the single-switch quadratic Boost (SSQB), which keeps the high gain while needing only one switch to drive. Adding voltage-lift cells produced three new topologies; at 5 V input, 50 kHz and 50 % duty cycle they reach voltage gains of about 4.7, 8.6 and 14, confirmed on a reconfigurable prototype. I then generalized this into a unified method for turning any two-stage converter into a single-switch equivalent.</span></span>
+        <span class="tag o">Energies '25</span>
+      </div>
+      <div class="file-row">
+        <span class="ln">03</span><i class="led red"></i>
+        <span><span class="name">Fault-tolerant cascaded Boost–Boost</span><span class="path">open-circuit switch faults · service continuity</span>
+        <span class="desc">If a switch fails open, a converter normally stops. Using the same single-switch idea, I designed fault-tolerant versions of the cascaded Boost–Boost in which one shared backup switching path takes over after a fault in either switch, so energy conversion and output-voltage regulation continue. The simplified version needs only one extra switch and one diode. All structures were validated by analysis, simulation and 5 V, 5 W experiments.</span></span>
+        <span class="tag r">faults</span>
+      </div>
+      <div style="height:6px"></div>
+    </section>
+
+    <h2>Interactive lab: why a quadratic boost?</h2>
+    <div class="panel">
+      <p>A standard boost converter has a gain of 1/(1−D). To reach high gain it needs a duty cycle close to 1, where losses explode. A quadratic boost squares that gain, so the same output needs a much smaller duty cycle. Move the slider and watch the current loops.</p>
+      <div class="lab">
+        <div>
+          <svg viewBox="0 0 360 190" role="img" aria-label="Boost converter with animated current loops">
+            <!-- wires -->
+            <path class="wire" d="M40 40H92M160 40H215M245 40H320V60M320 120V150H40V122M40 88V40M200 40V82M200 112V150M270 40V88M270 102V150"/>
+            <!-- source -->
+            <circle class="comp" cx="40" cy="105" r="16"/><text x="34" y="101" class="clbl" style="fill:var(--text)">+</text>
+            <text x="8" y="140" class="clbl">V<tspan font-size="8" dy="3">in</tspan></text>
+            <!-- inductor -->
+            <path class="comp" d="M92 40a8.5 8.5 0 0 1 17 0a8.5 8.5 0 0 1 17 0a8.5 8.5 0 0 1 17 0a8.5 8.5 0 0 1 17 0"/>
+            <text x="118" y="24" class="clbl">L</text>
+            <!-- switch -->
+            <circle cx="200" cy="82" r="2.5" fill="var(--text)"/><circle cx="200" cy="112" r="2.5" fill="var(--text)"/>
+            <line id="lever" class="comp" x1="200" y1="112" x2="214" y2="86"/>
+            <text x="178" y="100" class="clbl">S</text>
+            <!-- diode -->
+            <path class="comp" d="M215 30v20l26-10z" fill="none"/><path class="comp" d="M243 28v24"/>
+            <text x="222" y="22" class="clbl">D</text>
+            <!-- capacitor -->
+            <path class="comp" d="M258 88h24M258 102h24"/><text x="286" y="99" class="clbl">C</text>
+            <!-- load -->
+            <path class="comp" d="M320 60l8 5-16 10 16 10-16 10 16 10-16 10 8 5"/><text x="334" y="96" class="clbl">R</text>
+            <!-- current loops -->
+            <path id="loopOn"  class="flow" stroke="var(--orange)" d="M40 88V40H200V150H40V122"/>
+            <path id="loopOff" class="flow" stroke="var(--blue)"   d="M40 88V40H320V150H40V122"/>
+          </svg>
+          <div class="legend-line"><span><i class="led amber"></i>S on: L charges</span><span><i class="led blue"></i>S off: L discharges to load</span></div>
+        </div>
+        <div>
+          <svg id="plot" viewBox="0 0 300 190" role="img" aria-label="Voltage gain versus duty cycle">
+            <g stroke="#1a252d" fill="none">
+              <path d="M30 20V160H290"/><path d="M30 125H290M30 90H290M30 55H290M95 20V160M160 20V160M225 20V160" stroke-dasharray="2 4"/>
+            </g>
+            <text x="2" y="24" class="clbl">40</text><text x="2" y="59" class="clbl">30</text><text x="2" y="94" class="clbl">20</text><text x="2" y="129" class="clbl">10</text>
+            <text x="26" y="176" class="clbl">0</text><text x="150" y="176" class="clbl">0.5</text><text x="268" y="176" class="clbl">D→</text>
+            <path id="gBoost" fill="none" stroke="var(--blue)" stroke-width="2"/>
+            <path id="gQuad"  fill="none" stroke="var(--green)" stroke-width="2"/>
+            <path id="gVL"    fill="none" stroke="var(--purple)" stroke-width="2"/>
+            <path id="gDVL"   fill="none" stroke="var(--orange)" stroke-width="2"/>
+            <path id="gQVL"   fill="none" stroke="var(--red)" stroke-width="2"/>
+            <circle id="mBoost" r="4" fill="var(--blue)"/><circle id="mQuad" r="4" fill="var(--green)"/>
+            <circle id="mVL" r="4" fill="var(--purple)"/><circle id="mDVL" r="4" fill="var(--orange)"/><circle id="mQVL" r="4" fill="var(--red)"/>
+          </svg>
+          <div class="legend-line" style="margin:2px 0 10px;gap:12px"><span><i class="led blue"></i>boost</span><span><i class="led"></i>quadratic</span><span><i class="led purple"></i>VL-QBC</span><span><i class="led amber"></i>DVL-QBC</span><span><i class="led red"></i>QVL-QBC</span></div>
+          <div class="ctl">duty cycle D = <b id="dval" style="color:var(--text)">0.60</b></div>
+          <input id="d" type="range" min="0.10" max="0.80" step="0.01" value="0.60" aria-label="Duty cycle">
+          <div class="readout">
+            <div><small>boost</small><b id="gb" style="color:var(--blue)">2.5×</b></div>
+            <div><small>quadratic</small><b id="gq" style="color:var(--green)">6.3×</b></div>
+            <div><small>VL-QBC</small><b id="gvl" style="color:var(--purple)">7.3×</b></div>
+            <div><small>DVL-QBC</small><b id="gdvl" style="color:var(--orange)">13.5×</b></div>
+            <div><small>QVL-QBC</small><b id="gqvl" style="color:var(--red)">26.0×</b></div>
+            <div><small>20 mV →</small><b id="vo" style="color:var(--green)">125 mV</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="font-size:.82rem;margin:12px 0 0">Ideal CCM gains, no losses. VL-QBC, DVL-QBC and QVL-QBC are the voltage-lift quadratic boost converters from my thesis: each adds lift cells to reach a higher gain with the same single switch. Last box: output of the quadratic stage for a 20 mV input.</p>
+    </div>
+
+    <h2>Tools I work with</h2>
+    <div class="grid2">
+      <div class="card"><h3><i class="led"></i>Simulation &amp; modelling</h3><p>MATLAB/Simulink, Simscape, PLECS, LTspice. Converter modelling, transient and performance analysis.</p></div>
+      <div class="card"><h3><i class="led amber"></i>Hardware &amp; testing</h3><p>Prototyping, oscilloscopes, voltage and current probes, DC supplies, electronic loads, data acquisition.</p></div>
+      <div class="card"><h3><i class="led blue"></i>Control</h3><p>MPPT, voltage regulation, duty-cycle and switching-frequency control, fault-tolerant reconfiguration.</p></div>
+      <div class="card"><h3><i class="led purple"></i>Programming &amp; CAD</h3><p>MATLAB, C/C++, Cadence Virtuoso, AutoCAD, LaTeX.</p></div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  const GMAX = 40;
+  const X = d => 30 + d/0.9*260, Y = g => 160 - Math.min(g,GMAX)/GMAX*140;
+  // stop each curve where it leaves the top of the plot
+  const curve = f => { let s=""; for(let d=0; d<=0.86; d+=0.005){ s += (s?"L":"M") + X(d).toFixed(1) + " " + Y(f(d)).toFixed(1); if (f(d) >= GMAX) break; } return s; };
+  const fb = d => 1/(1-d), fq = d => 1/((1-d)*(1-d));
+  // voltage-lift quadratic boost family: M_k = 1 + 2^k/(1-D)^2, k = 0, 1, 2
+  const fvl = k => d => 1 + Math.pow(2,k)/((1-d)*(1-d));
+  const fVL = fvl(0), fDVL = fvl(1), fQVL = fvl(2);
+  const series = [["Boost",fb],["Quad",fq],["VL",fVL],["DVL",fDVL],["QVL",fQVL]];
+  for (const [n,f] of series) document.getElementById("g"+n).setAttribute("d", curve(f));
+  const gx = g => g >= 100 ? Math.round(g)+"×" : (g+1e-9).toFixed(1)+"×";
+
+  const slider = document.getElementById("d");
+  let D = +slider.value;
+  function update(){
+    D = +slider.value;
+    document.getElementById("dval").textContent = D.toFixed(2);
+    document.getElementById("gb").textContent = fb(D).toFixed(1)+"×";
+    document.getElementById("gq").textContent = gx(fq(D));
+    document.getElementById("gvl").textContent = gx(fVL(D));
+    document.getElementById("gdvl").textContent = gx(fDVL(D));
+    document.getElementById("gqvl").textContent = gx(fQVL(D));
+    const mv = 20*fq(D);
+    document.getElementById("vo").textContent = mv >= 1000 ? (mv/1000).toFixed(2)+" V" : Math.round(mv)+" mV";
+    for (const [n,f] of series){
+      const m = document.getElementById("m"+n), g = f(D);
+      m.setAttribute("cx",X(D)); m.setAttribute("cy",Y(g));
+      m.style.display = g > GMAX ? "none" : "";  // hide markers that are off the chart
+    }
+  }
+  slider.addEventListener("input", update); update();
+
+  // switching animation: period 2 s, ON for D of it
+  const on = document.getElementById("loopOn"), off = document.getElementById("loopOff"), lever = document.getElementById("lever");
+  const T = 2000; let t0 = performance.now();
+  (function tick(now){
+    const phase = ((now - t0) % T) / T, isOn = phase < D;
+    on.classList.toggle("on", isOn); off.classList.toggle("on", !isOn);
+    lever.setAttribute("x2", isOn ? 200 : 214); lever.setAttribute("y2", isOn ? 82 : 86);
+    lever.style.stroke = isOn ? "var(--orange)" : "var(--text)";
+    requestAnimationFrame(tick);
+  })(t0);
+})();
+</script>
+</body>
+</html>

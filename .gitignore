@@ -1,0 +1,10 @@
+# Private or working files: kept on your computer, never published
+.claude/
+applications/
+CV_english/
+/CV_english.pdf
+/Niloufar_Dizangian_Poster_IEEE_R8_SYP_Krakow_2026.pdf
+
+# Old CVs no longer linked from the site
+files/Niloufar_Dizangian_CV_Industry_FR.pdf
+files/Niloufar_Dizangian_CV_Academic.pdf
